@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>יום גיבוש מקצועי - לו"ז דינמי</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#f3e5f5',
+                            medium: '#ab47bc',
+                            dark: '#4a148c',
+                            accent: '#2e7d32',
+                            accentLight: '#e8f5e9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Heebo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .slide-viewport {
+            height: 100vh;
+            height: 100dvh;
+        }
+        .slide {
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+        }
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .scrollable-content {
+            max-height: calc(100% - 140px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .scrollable-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background-color: rgba(171, 71, 188, 0.3);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-slate-50 text-gray-800 overflow-hidden select-none">
+
+    <div class="slide-viewport w-full max-w-md mx-auto bg-white shadow-2xl relative flex flex-col justify-between overflow-hidden border-x border-gray-100">
+        
+        <!-- Progress bar -->
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gray-100 z-50">
+            <div id="progressBar" class="h-full bg-brand-medium transition-all duration-300" style="width: 10%;"></div>
+        </div>
+
+        <!-- Background decoration -->
+        <div class="absolute inset-0 pointer-events-none opacity-[0.06] z-0 flex justify-between items-between p-4">
+            <i class="fa-solid fa-leaf text-[150px] text-brand-accent transform -rotate-45 self-start"></i>
+            <i class="fa-solid fa-spa text-[150px] text-brand-accent transform rotate-12 self-end"></i>
+        </div>
+
+        <!-- Slides area -->
+        <div class="relative flex-1 z-10 w-full h-full">
+
+            <!-- Slide 1: Opening -->
+            <div class="slide active p-6 flex flex-col justify-center items-center text-center" id="slide-0">
+                <div class="w-20 h-20 bg-brand-light rounded-full flex items-center justify-center text-brand-medium text-3xl mb-6 shadow-sm">
+                    <i class="fa-solid fa-seedling text-brand-accent"></i>
+                </div>
+                <span class="text-brand-medium font-bold tracking-wider text-sm bg-brand-light px-3 py-1 rounded-full mb-3">יום של צמיחה וחיבור</span>
+                <h1 class="text-3xl font-black text-brand-dark leading-tight mb-2 text-center">יום גיבוש מקצועי</h1>
+                <p class="text-gray-600 text-lg text-center">משקיעים בעצמנו, צומחים יחד</p>
+                
+                <div class="mt-12 p-4 bg-brand-accentLight/50 rounded-xl border border-brand-accent/10 flex items-center gap-3">
+                    <i class="fa-solid fa-hand-pointer text-brand-accent animate-bounce text-xl"></i>
+                    <p class="text-xs text-brand-accent font-medium">החליקו שמאלה באצבע או השתמשו בחצים לניווט</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Full Schedule -->
+            <div class="slide p-6 flex flex-col justify-between" id="slide-1">
+                <div class="mt-4">
+                    <h2 class="text-2xl font-bold text-brand-dark border-r-4 border-brand-medium pr-3 mb-4 text-center">סדר היום שלנו</h2>
+                    <p class="text-xs text-gray-500 mb-4 text-center">לחצו על שורה כדי לקפוץ ישירות לפעילות</p>
+                </div>
+                <div class="scrollable-content flex-1 space-y-2 pr-1">
+                    <button onclick="goToSlide(2)" class="w-full text-right p-3 bg-brand-light/40 hover:bg-brand-light/80 rounded-xl flex justify-between items-center border border-brand-light transition">
+                        <span class="font-bold text-brand-dark text-sm">09:00 - 09:45</span>
+                        <span class="text-sm font-medium text-gray-700">נחיתה וארוחת בוקר</span>
+                    </button>
+                    <button onclick="goToSlide(3)" class="w-full text-right p-3 bg-brand-light/40 hover:bg-brand-light/80 rounded-xl flex justify-between items-center border border-brand-light transition">
+                        <span class="font-bold text-brand-dark text-sm">09:45 - 10:15</span>
+                        <span class="text-sm font-medium text-gray-700">תרגיל "מדריך למשתמש"</span>
+                    </button>
+                    <button onclick="goToSlide(4)" class="w-full text-right p-3 bg-brand-light/40 hover:bg-brand-light/80 rounded-xl flex justify-between items-center border border-brand-light transition">
+                        <span class="font-bold text-brand-dark text-sm">10:15 - 11:00</span>
+                        <span class="text-sm font-medium text-gray-700">סקירת "התמונה הגדולה"</span>
+                    </button>
+                    <button onclick="goToSlide(5)" class="w-full text-right p-3 bg-brand-light/40 hover:bg-brand-light/80 rounded-xl flex justify-between items-center border border-brand-light transition">
+                        <span class="font-bold text-brand-dark text-sm">11:00 - 11:15</span>
+                        <span class="text-sm font-medium text-gray-700">הפסקת התרעננות</span>
+                    </button>
+                    <button onclick="goToSlide(6)" class="w-full text-right p-3 bg-brand-light/40 hover:bg-brand-light/80 rounded-xl flex justify-between items-center border border-brand-light transition">
+                        <span class="font-bold text-brand-dark text-sm">11:15 - 12:15</span>
+                        <span class="text-sm font-medium text-gray-700">סדנת "התחל, הפסק, המשך"</span>
+                    </button>
+                    <button onclick="goToSlide(7)" class="w-full text-right p-3 bg-brand-light/40 hover:bg-brand-light/80 rounded-xl flex justify-between items-center border border-brand-light transition">
+                        <span class="font-bold text-brand-dark text-sm">12:15 - 13:00</span>
+                        <span class="text-sm font-medium text-gray-700">סיכום אופרטיבי ו-Ownership</span>
+                    </button>
+                    <button onclick="goToSlide(8)" class="w-full text-right p-3 bg-brand-light/40 hover:bg-brand-light/80 rounded-xl flex justify-between items-center border border-brand-light transition">
+                        <span class="font-bold text-brand-dark text-sm">13:00 - 13:30</span>
+                        <span class="text-sm font-medium text-gray-700">סגירה והוקרה</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 3: Breakfast -->
+            <div class="slide p-6 flex flex-col justify-between" id="slide-2">
+                <div class="mt-4">
+                    <div class="inline-block bg-brand-light text-brand-dark font-bold text-xs px-3 py-1 rounded-full mb-3">09:00 - 09:45</div>
+                    <h2 class="text-2xl font-bold text-brand-dark mb-4 text-center">נחיתה וארוחת בוקר</h2>
+                </div>
+                
+                <div class="scrollable-content flex-1 space-y-4">
+                    <p class="text-gray-600 text-sm leading-relaxed text-right">זמן מצוין להשאיר את המטלות והמשימות השוטפות בבית או במשרד, להיפגש באמת, לפטפט וליהנות יחד לפני שמתחילים.</p>
+                    
+                    <div class="space-y-3 bg-brand-accentLight/30 p-4 rounded-2xl border border-brand-accent/10">
+                        <h4 class="font-bold text-brand-accent text-sm text-right"><i class="fa-solid fa-cookie-bite ml-2"></i>מה בתפריט?</h4>
+                        <ul class="text-xs text-gray-700 space-y-1.5 list-disc list-inside text-right">
+                            <li>קפה משובח ומאפים טריים</li>
+                            <li>נשנושים ופירות מרעננים</li>
+                            <li>מוזיקת רקע קלילה ואווירה חופשית</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: User Manual -->
+            <div class="slide p-6 flex flex-col justify-between" id="slide-3">
+                <div class="mt-4">
+                    <div class="inline-block bg-brand-light text-brand-dark font-bold text-xs px-3 py-1 rounded-full mb-3">09:45 - 10:15</div>
+                    <h2 class="text-2xl font-bold text-brand-dark mb-4 text-center">תרגיל: "מדריך למשתמש"</h2>
+                </div>
+                
+                <div class="scrollable-content flex-1 space-y-4">
+                    <div class="bg-violet-50 p-4 rounded-2xl border border-violet-100 flex items-start gap-3">
+                        <i class="fa-solid fa-circle-info text-brand-medium text-lg mt-0.5"></i>
+                        <p class="text-sm text-brand-dark font-medium leading-relaxed text-right">איך הכי נכון לעבוד איתי? כל חבר צוות יוצר מפה קצרה של הרגלי העבודה שלו.</p>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        <h4 class="font-bold text-gray-700 text-sm text-right">הנושאים שנשתף:</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="p-3 bg-gray-50 rounded-xl border border-gray-100 text-right">
+                                <span class="block text-brand-medium font-bold text-xs mb-1">תקשורת</span>
+                                <span class="text-xs text-gray-600">מתי לשלוח מייל ומתי להתקשר?</span>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-xl border border-gray-100 text-right">
+                                <span class="block text-brand-medium font-bold text-xs mb-1">פוקוס</span>
+                                <span class="text-xs text-gray-600">שעות העבודה האפקטיביות שלי</span>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-xl border border-gray-100 text-right">
+                                <span class="block text-brand-medium font-bold text-xs mb-1">עזרה</span>
+                                <span class="text-xs text-gray-600">איך לתת לי פידבק מקדם?</span>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-xl border border-gray-100 text-right">
+                                <span class="block text-brand-medium font-bold text-xs mb-1">מוטיבציה</span>
+                                <span class="text-xs text-gray-600">מה נותן לי דלק בעבודה?</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Big Picture -->
+            <div class="slide p-6 flex flex-col justify-between" id="slide-4">
+                <div class="mt-4">
+                    <div class="inline-block bg-brand-light text-brand-dark font-bold text-xs px-3 py-1 rounded-full mb-3">10:15 - 11:00</div>
+                    <h2 class="text-2xl font-bold text-brand-dark mb-4 text-center">סקירת "התמונה הגדולה"</h2>
+                </div>
+                
+                <div class="scrollable-content flex-1 space-y-4">
+                    <p class="text-gray-600 text-sm leading-relaxed text-right">מבט-על אסטרטגי על היעדים והחזון של הצוות והארגון. נבין לאן אנחנו מנווטים ומה החלק של כל אחד מאיתנו בפאזל הגדול.</p>
+                    
+                    <div class="p-4 bg-brand-light/30 rounded-2xl border border-brand-light flex items-center gap-3">
+                        <div class="p-2 bg-brand-medium text-white rounded-lg text-lg">
+                            <i class="fa-solid fa-mountain-sun"></i>
+                        </div>
+                        <div class="text-right">
+                            <h4 class="font-bold text-brand-dark text-sm">מחברים בין מטרות לעשייה</h4>
+                            <p class="text-xs text-gray-500">יוצרים סנכרון מלא ותיאום ציפיות להמשך הדרך.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Break -->
+            <div class="slide p-6 flex flex-col justify-center items-center text-center" id="slide-5">
+                <div class="w-16 h-16 bg-brand-accentLight rounded-full flex items-center justify-center text-brand-accent text-2xl mb-4">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <div class="inline-block bg-brand-light text-brand-dark font-bold text-xs px-3 py-1 rounded-full mb-3">11:00 - 11:15</div>
+                <h2 class="text-2xl font-bold text-brand-dark mb-2 text-center">הפסקת התרעננות</h2>
+                <p class="text-gray-600 text-sm px-4 text-center">חילוץ עצמות קצר, נשימת אוויר צח ושיחות מסדרון כיפיות.</p>
+                <div class="flex gap-4 mt-6 text-xl text-brand-medium">
+                    <i class="fa-solid fa-cookie"></i>
+                    <i class="fa-solid fa-apple-whole"></i>
+                    <i class="fa-solid fa-comment-dots"></i>
+                </div>
+            </div>
+
+            <!-- Slide 7: Start Stop Continue -->
+            <div class="slide p-6 flex flex-col justify-between" id="slide-6">
+                <div class="mt-4">
+                    <div class="inline-block bg-brand-light text-brand-dark font-bold text-xs px-3 py-1 rounded-full mb-3">11:15 - 12:15</div>
+                    <h2 class="text-2xl font-bold text-brand-dark mb-4 text-center">סדנת "התחל, הפסק, המשך"</h2>
+                </div>
+                
+                <div class="scrollable-content flex-1 space-y-3">
+                    <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-100 flex gap-3 text-right">
+                        <span class="text-emerald-600 text-lg font-bold w-6"><i class="fa-solid fa-play"></i></span>
+                        <div class="text-right">
+                            <span class="block font-bold text-emerald-800 text-sm">התחל (Start)</span>
+                            <span class="text-xs text-emerald-700">איזה הרגלים ותהליכים חדשים כדאי לנו לאמץ?</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-3 bg-rose-50 rounded-xl border border-rose-100 flex gap-3 text-right">
+                        <span class="text-rose-500 text-lg font-bold w-6"><i class="fa-solid fa-circle-stop"></i></span>
+                        <div class="text-right">
+                            <span class="block font-bold text-rose-800 text-sm">הפסק (Stop)</span>
+                            <span class="text-xs text-rose-700">מה מעכב אותנו ולא מביא תועלת?</span>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-violet-50 rounded-xl border border-violet-100 flex gap-3 text-right">
+                        <span class="text-brand-medium text-lg font-bold w-6"><i class="fa-solid fa-rotate-right"></i></span>
+                        <div class="text-right">
+                            <span class="block font-bold text-brand-dark text-sm">המשך (Continue)</span>
+                            <span class="text-xs text-violet-700">מה עובד לנו פנטסטי ונרצה לחזק ולשמר?</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Ownership -->
+            <div class="slide p-6 flex flex-col justify-between" id="slide-7">
+                <div class="mt-4">
+                    <div class="inline-block bg-brand-light text-brand-dark font-bold text-xs px-3 py-1 rounded-full mb-3">12:15 - 13:00</div>
+                    <h2 class="text-2xl font-bold text-brand-dark mb-4 text-center">סיכום אופרטיבי ו-Ownership</h2>
+                </div>
+                
+                <div class="scrollable-content flex-1 space-y-4">
+                    <p class="text-gray-600 text-sm leading-relaxed text-right">לא משאירים רעיונות באוויר! נהפוך את התובנות מהיום למשימות קונקרטיות ונגדיר מי מוביל כל יוזמה (Ownership).</p>
+                    
+                    <div class="p-4 bg-brand-light/30 rounded-2xl border border-brand-light flex items-center justify-between">
+                        <div class="text-right">
+                            <h4 class="font-bold text-brand-dark text-sm">לוקחים אחריות אישית</h4>
+                            <p class="text-xs text-gray-500">כל אחד לוקח לפחות משימה אחת להובלה.</p>
+                        </div>
+                        <span class="text-4xl font-black text-brand-medium opacity-60">100%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Appreciation -->
+            <div class="slide p-6 flex flex-col justify-between" id="slide-8">
+                <div class="mt-4">
+                    <div class="inline-block bg-brand-light text-brand-dark font-bold text-xs px-3 py-1 rounded-full mb-3">13:00 - 13:30</div>
+                    <h2 class="text-2xl font-bold text-brand-dark mb-4 text-center">סגירה והוקרה</h2>
+                </div>
+                
+                <div class="scrollable-content flex-1 space-y-4 flex flex-col justify-center">
+                    <div class="bg-amber-50 p-6 rounded-2xl border border-amber-100 text-center relative">
+                        <span class="absolute -top-3 right-4 text-3xl text-amber-300"><i class="fa-solid fa-quote-right"></i></span>
+                        <h3 class="text-xl font-bold text-amber-800 mb-2">"למה אני מעריך אותך"</h3>
+                        <p class="text-sm text-amber-700">מסיימים את היום בפרגון אמיתי, מחמם לב ומחבר בין כולם.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Closing -->
+            <div class="slide p-6 flex flex-col justify-center items-center text-center" id="slide-9">
+                <div class="w-16 h-16 bg-brand-light rounded-full flex items-center justify-center text-brand-medium text-2xl mb-4">
+                    <i class="fa-solid fa-heart text-red-500"></i>
+                </div>
+                <h2 class="text-3xl font-black text-brand-dark mb-2 text-center">תודה לכולם!</h2>
+                <p class="text-gray-600 text-sm px-4 text-center">היה לנו יום משמעותי ומגבש. שתהיה לנו המשך עבודה משותפת, פורייה ומלאת צמיחה!</p>
+                <div class="mt-8 text-xs text-brand-medium bg-brand-light px-3 py-1.5 rounded-full font-bold">
+                    ניפגש בשטח! 🌿
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom control bar - RTL navigation -->
+        <div class="p-4 bg-white border-t border-gray-100 z-40 flex items-center justify-between relative shadow-[0_-10px_20px_rgba(0,0,0,0.02)]" dir="rtl">
+            <!-- Previous button (appears on RIGHT in RTL) -->
+            <button onclick="prevSlide()" class="w-12 h-12 rounded-full hover:bg-slate-50 flex items-center justify-center text-brand-medium active:scale-95 transition" aria-label="שקופית קודמת">
+                <i class="fa-solid fa-arrow-right text-lg"></i>
+            </button>
+            
+            <!-- Info and quick jump -->
+            <button onclick="toggleIndexDrawer()" class="flex flex-col items-center justify-center px-4 py-1 rounded-xl hover:bg-slate-50 transition active:scale-95">
+                <span id="slideIndicator" class="text-xs font-bold text-gray-500">1 / 10</span>
+                <span class="text-[10px] text-brand-medium font-bold flex items-center gap-1">
+                    <i class="fa-solid fa-list-ul"></i>
+                    תוכן עניינים
+                </span>
+            </button>
+
+            <!-- Next button (appears on LEFT in RTL) -->
+            <button onclick="nextSlide()" class="w-12 h-12 rounded-full bg-brand-medium text-white flex items-center justify-center hover:bg-brand-dark active:scale-95 transition shadow-md shadow-brand-medium/20" aria-label="שקופית הבאה">
+                <i class="fa-solid fa-arrow-left text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Quick navigation drawer -->
+        <div id="indexDrawer" class="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl z-50 transform translate-y-full transition-transform duration-300 border-t border-gray-100 p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-brand-dark">ניווט מהיר</h3>
+                <button onclick="toggleIndexDrawer()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-gray-500"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="grid grid-cols-2 gap-2 max-h-[300px] overflow-y-auto">
+                <button onclick="jumpToSlide(0)" class="p-2 text-right text-xs rounded-lg bg-slate-50 hover:bg-brand-light/30 text-gray-700">1. פתיחה</button>
+                <button onclick="jumpToSlide(1)" class="p-2 text-right text-xs rounded-lg bg-slate-50 hover:bg-brand-light/30 text-gray-700">2. הלו"ז המלא</button>
+                <button onclick="jumpToSlide(2)" class="p-2 text-right text-xs rounded-lg bg-slate-50 hover:bg-brand-light/30 text-gray-700">3. ארוחת בוקר</button>
+                <button onclick="jumpToSlide(3)" class="p-2 text-right text-xs rounded-lg bg-slate-50 hover:bg-brand-light/30 text-gray-700">4. מדריך למשתמש</button>
+                <button onclick="jumpToSlide(4)" class="p-2 text-right text-xs rounded-lg bg-slate-50 hover:bg-brand-light/30 text-gray-700">5. התמונה הגדולה</button>
+                <button onclick="jumpToSlide(5)" class="p-2 text-right text-xs rounded-lg bg-slate-50 hover:bg-brand-light/30 text-gray-700">6. הפסקה</button>
+                <button onclick="jumpToSlide(6)" class="p-2 text-right text-xs rounded-lg bg-slate-50 hover:bg-brand-light/30 text-gray-700">7. התחל, הפסק, המשך</button>
+                <button onclick="jumpToSlide(7)" class="p-2 text-right text-xs rounded-lg bg-slate-50 hover:bg-brand-light/30 text-gray-700">8. סיכום ו-Ownership</button>
+                <button onclick="jumpToSlide(8)" class="p-2 text-right text-xs rounded-lg bg-slate-50 hover:bg-brand-light/30 text-gray-700">9. הוקרה ופרגון</button>
+                <button onclick="jumpToSlide(9)" class="p-2 text-right text-xs rounded-lg bg-slate-50 hover:bg-brand-light/30 text-gray-700">10. סיום ותודות</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const slideIndicator = document.getElementById('slideIndicator');
+        const indexDrawer = document.getElementById('indexDrawer');
+
+        function updateSlides() {
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            const progressPercentage = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+
+            // Fixed RTL number display: show as "1 / 10" not "10 / 1"
+            slideIndicator.innerText = `${slides.length} / ${currentSlide + 1}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateSlides();
+        }
+
+        function jumpToSlide(slideIndex) {
+            goToSlide(slideIndex);
+            toggleIndexDrawer();
+        }
+
+        function toggleIndexDrawer() {
+            const isClosed = indexDrawer.classList.contains('translate-y-full');
+            if (isClosed) {
+                indexDrawer.classList.remove('translate-y-full');
+            } else {
+                indexDrawer.classList.add('translate-y-full');
+            }
+        }
+
+        // Swipe support for mobile - RTL adjusted
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const gestureZone = document.body;
+
+        gestureZone.addEventListener('touchstart', function(event) {
+            touchStartX = event.changedTouches[0].screenX;
+        }, false);
+
+        gestureZone.addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const swipeDistance = 50;
+            
+            // In RTL: swipe right = previous, swipe left = next
+            if (touchEndX < touchStartX - swipeDistance) {
+                // Swipe left - next
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + swipeDistance) {
+                // Swipe right - previous
+                prevSlide();
+            }
+        }
+
+        // Keyboard support - RTL adjusted
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                nextSlide(); // Left arrow = next in RTL
+            } else if (event.key === 'ArrowRight') {
+                prevSlide(); // Right arrow = previous in RTL
+            }
+        });
+    </script>
+</body>
+</html>
